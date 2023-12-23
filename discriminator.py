@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+import config
 
 
 class CnnBlock(nn.Module):
@@ -19,7 +20,7 @@ class Discriminator(nn.Module):
         super().__init__()
         if features is None:
             features = [64, 128, 256, 512]
-        self.initial = nn.Sequential(nn.Conv2d(in_channels, features[0]
+        self.initial = nn.Sequential(nn.Conv2d(in_channels*2, features[0]
                                                , kernel_size=4, stride=2, bias=False, padding=1),
                                      nn.LeakyReLU(0.2))
         layers = []
@@ -35,3 +36,6 @@ class Discriminator(nn.Module):
         x = torch.cat([x, y], dim=1)
         x = self.initial(x)
         return self.model(x)
+
+
+

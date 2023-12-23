@@ -19,8 +19,8 @@ class ImageDataset(Dataset):
     def __len__(self):
         return len(self.files_list)
 
-    def __getitem__(self, item):
-        img_file = self.files_list[item]
+    def __getitem__(self, index):
+        img_file = self.files_list[index]
         img_path = os.path.join(self.root_dir, img_file)
         img = Image.open(img_path).convert("RGB")
         img = self.transform(img)
